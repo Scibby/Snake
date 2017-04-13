@@ -1,5 +1,6 @@
 package game.main;
 
+import game.states.GameOverState;
 import game.states.GameState;
 import game.states.MenuState;
 import scibby.core.Game;
@@ -12,12 +13,14 @@ public class Main extends Game{
 	
 	public static MenuState menuState = new MenuState(0);
 	public static GameState gameState = new GameState(1);
+	public static GameOverState gameOverState = new GameOverState(2);
 	
 	private void init(){
 		gc = init(512, 552, gc, "Snake");
 		gc.setAlwaysOnTop(true);
 		GameStateManager.addState(menuState);
 		GameStateManager.addState(gameState);
+		GameStateManager.addState(gameOverState);
 		GameStateManager.currentState = 0;
 		menuState.start();
 	}

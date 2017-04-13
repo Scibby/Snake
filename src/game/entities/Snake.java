@@ -9,10 +9,12 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Random;
 
+import game.main.Main;
 import scibby.entities.Mob;
 import scibby.events.Event;
 import scibby.graphics.Screen;
 import scibby.input.Keyboard;
+import scibby.states.GameStateManager;
 import scibby.util.Vector2i;
 
 public class Snake extends Mob{
@@ -45,7 +47,7 @@ public class Snake extends Mob{
 		super.tick();
 		int xa = 0, ya = 0;
 
-		if(timer % 6 == 0){
+		if(timer % 4 == 0){
 			
 			for(Vector2i piece : tail){
 				if(Vector2i.getDistance(pos, piece) <= 0){
@@ -133,7 +135,10 @@ public class Snake extends Mob{
 	}
 
 	private void death(){
-		System.exit(0);
+		Main.gameState.clearLayers();
+		GameStateManager.currentState = 2;
+		Main.gameOverState.start(score);
+		score = 0;
 	}
 
 	@Override
