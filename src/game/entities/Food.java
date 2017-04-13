@@ -25,10 +25,15 @@ public class Food extends Mob{
 		screen.fillRect((int) x, (int) y, width, height, 0xde2a2a, false);
 	}
 
-	public void newLocation(){
+	public void newLocation(Snake snake){
 		this.x = (rand.nextInt(32) + 1) * 16;
 		this.y = (rand.nextInt(32) + 1) * 16;
 
+		for(int i = 0; i < snake.tail.size(); i++){
+			if(this.x == snake.tail.get(i).getX()) this.x = (rand.nextInt(32) + 1) * 16;
+			if(this.y == snake.tail.get(i).getX()) this.y = (rand.nextInt(32) + 1) * 16;
+		}
+		
 		pos.set((int) x, (int) y);
 	}
 

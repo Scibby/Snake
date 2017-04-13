@@ -32,7 +32,7 @@ public class GameState extends State{
 
 		panel = new UIPanel(0, 0, Game.getGc().getWidth(), 40);
 
-		score = new UILabel(10, 30, 10, 10, panel, "Score: ", new Font("Arial", Font.PLAIN, 26));
+		score = new UILabel(10, 30, 10, 10, panel, "Score: 0", new Font("Arial", Font.PLAIN, 26));
 
 		score.setColour(0xeeeeee);
 
@@ -45,7 +45,6 @@ public class GameState extends State{
 	public void tick(){
 		super.tick();
 		score.text = "Score: " + Snake.score;
-
 	}
 
 	@Override

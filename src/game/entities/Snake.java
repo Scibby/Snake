@@ -45,18 +45,21 @@ public class Snake extends Mob{
 		super.tick();
 		int xa = 0, ya = 0;
 
-		if(timer % 4 == 0){
+		if(timer % 6 == 0){
+			
+			for(Vector2i piece : tail){
+				if(Vector2i.getDistance(pos, piece) <= 0){
+					death();
+				}
+			}
 
 			if(Keyboard.isKeyPressed(KeyEvent.VK_W) && dir != Down){
 				dir = Up;
-			}
-			if(Keyboard.isKeyPressed(KeyEvent.VK_S) && dir != Up){
+			}else if(Keyboard.isKeyPressed(KeyEvent.VK_S) && dir != Up){
 				dir = Down;
-			}
-			if(Keyboard.isKeyPressed(KeyEvent.VK_D) && dir != Left){
+			}else if(Keyboard.isKeyPressed(KeyEvent.VK_D) && dir != Left){
 				dir = Right;
-			}
-			if(Keyboard.isKeyPressed(KeyEvent.VK_A) && dir != Right){
+			}else if(Keyboard.isKeyPressed(KeyEvent.VK_A) && dir != Right){
 				dir = Left;
 			}
 
@@ -94,19 +97,13 @@ public class Snake extends Mob{
 
 			pos.set((int) x, (int) y);
 
-			for(Vector2i piece : tail){
-				if(Vector2i.getDistance(pos, piece) <= 0){
-					death();
-				}
-			}
-
 			tail.add(new Vector2i(oldPos));
 			tail.remove(0);
 
 			if(Vector2i.getDistance(pos, food.pos) <= 0){
 				score++;
 				add = true;
-				food.newLocation();
+				food.newLocation(this);
 			}
 
 			oldPos = new Vector2i(pos);
