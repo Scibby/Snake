@@ -41,6 +41,36 @@ public class Screen{
 		}
 	}
 
+	public void drawRect(int x, int y, int width, int height, int colour, int thickness, boolean fixed){
+		if(!fixed){
+			x -= xOffset;
+			y -= yOffset;
+		}
+		
+		thickness = thickness <= 0 ? 1 : thickness;
+
+		for(int yy = 0; yy < height; yy++){
+			int yo = y + yy;
+			if(yo < 0 || yo >= this.height) continue;
+			for(int xx = 0; xx < width; xx++){
+				int xo = x + xx;
+				if(xo < 0 || xo >= this.width) continue;
+
+				for(int i = 0; i < thickness; i++){
+					if(yy == i){
+						pixels[xo + yo * this.width] = colour + (0xff << 24);
+					}else if(yy == height - i - 1){
+						pixels[xo + yo * this.width] = colour + (0xff << 24);
+					}else if(xx == i){
+						pixels[xo + yo * this.width] = colour + (0xff << 24);
+					}else if(xx == width - i - 1){
+						pixels[xo + yo * this.width] = colour + (0xff << 24);
+					}
+				}
+			}
+		}
+	}
+
 	public void renderSprite(int x, int y, Sprite sprite){
 		x -= xOffset;
 		y -= yOffset;

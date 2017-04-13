@@ -22,7 +22,7 @@ public class UIButton extends UIComponent{
 	private UIButtonListener buttonListener = new UIButtonListener(){
 	};
 
-	private UILabel label;
+	public UILabel label;
 
 	private boolean inside = false;
 	private boolean pressed = false;
@@ -97,7 +97,7 @@ public class UIButton extends UIComponent{
 
 	@Override
 	public void render(Screen screen){
-		screen.fillRect(getAbsolutePosition().getX(), getAbsolutePosition().getY(), width, height, colour, true);
+		screen.drawRect(getAbsolutePosition().getX(), getAbsolutePosition().getY(), width, height, colour, 4, true);
 	}
 
 	public void setText(String text){
@@ -117,6 +117,10 @@ public class UIButton extends UIComponent{
 		h += y;
 
 		return ((w < x || w > xp) && (h < y || h > yp));
+	}
+	
+	public boolean isHovering(){
+		return inside;
 	}
 
 	public void setColour(int colour){

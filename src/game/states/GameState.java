@@ -23,7 +23,6 @@ public class GameState extends State{
 
 	@Override
 	public void start(){
-		super.start();
 		level = new GameLevel(34, 34, 512, 512, 16);
 		Level.addLevel(level);
 		Level.setLevel(1);
