@@ -19,7 +19,8 @@ public class UIButton extends UIComponent{
 
 	private UIActionListener actionListener;
 
-	public UIButtonListener buttonListener;
+	private UIButtonListener buttonListener = new UIButtonListener(){
+	};
 
 	public UILabel label;
 
@@ -28,20 +29,15 @@ public class UIButton extends UIComponent{
 
 	private int colour = 0xdd00000;
 
-	public UIButton(Vector2i position, int width, int height, UIPanel parent, UIActionListener actionListener, UIButtonListener buttonListener){
+	public UIButton(Vector2i position, int width, int height, UIPanel parent, UIActionListener actionListener){
 		super(position, width, height, parent);
 		this.actionListener = actionListener;
-		this.buttonListener = buttonListener;
 		label = new UILabel(new Vector2i(position), width, height, parent, "Button", new Font("Arial", Font.PLAIN, 26), this);
 		parent.addComponent(label);
 	}
 
 	public UIButton(int x, int y, int width, int height, UIPanel parent, UIActionListener actionListener){
-		this(new Vector2i(x, y), width, height, parent, actionListener, new UIButtonListener(){});
-	}
-	
-	public UIButton(int x, int y, int width, int height, UIPanel parent, UIActionListener actionListener, UIButtonListener buttonListener){
-		this(new Vector2i(x, y), width, height, parent, actionListener, buttonListener);
+		this(new Vector2i(x, y), width, height, parent, actionListener);
 	}
 
 	@Override
@@ -121,10 +117,6 @@ public class UIButton extends UIComponent{
 		h += y;
 
 		return ((w < x || w > xp) && (h < y || h > yp));
-	}
-	
-	public boolean isHovering(){
-		return inside;
 	}
 
 	public void setColour(int colour){

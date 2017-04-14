@@ -48,7 +48,14 @@ public class MenuState extends State{
 				Main.gameState.start();
 			}
 
-		}, new UIButtonListener(){
+		});
+
+		title.setColour(0xeeeeee);
+
+		button.setColour(0xeeeeee);
+		button.setButtonListener(new UIButtonListener(){
+			
+			@Override
 			public void buttonEntered(UIButton button){
 				super.buttonEntered(button);
 				button.setColour(0xdff442);
@@ -63,10 +70,6 @@ public class MenuState extends State{
 			}
 
 		});
-
-		title.setColour(0xeeeeee);
-
-		button.setColour(0xeeeeee);
 		button.label.setColour(0xeeeeee);
 		button.setText("Play Now");
 
