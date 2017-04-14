@@ -31,6 +31,7 @@ public class Keyboard implements KeyListener{
 		listener.onEvent(event);
 	}
 
+	@Deprecated
 	public static boolean isKeyPressed(int key){
 		return keys[key];
 	}

@@ -43,7 +43,7 @@ public class GameState extends State{
 	@Override
 	public void tick(){
 		super.tick();
-		score.text = "Score: " + Snake.score;
+		//score.text = "Score: " + Snake.score;
 	}
 
 	@Override

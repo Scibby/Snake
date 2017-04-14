@@ -12,6 +12,12 @@ import java.util.Random;
 import game.main.Main;
 import scibby.entities.Mob;
 import scibby.events.Event;
+import scibby.events.EventDispatcher;
+import scibby.events.types.keyboard.KeyPressedEvent;
+import scibby.events.types.keyboard.KeyReleasedEvent;
+import scibby.events.types.mouse.MouseMovedEvent;
+import scibby.events.types.mouse.MousePressedEvent;
+import scibby.events.types.mouse.MouseReleasedEvent;
 import scibby.graphics.Screen;
 import scibby.input.Keyboard;
 import scibby.states.GameStateManager;
@@ -49,25 +55,7 @@ public class Snake extends Mob{
 		super.tick();
 		int xa = 0, ya = 0;
 
-		if(!changedDir){
-			if(Keyboard.isKeyPressed(KeyEvent.VK_W) || Keyboard.isKeyPressed(KeyEvent.VK_UP) && dir != Down){
-				dir = Up;
-				changedDir = true;
-			}else if(Keyboard.isKeyPressed(KeyEvent.VK_S) || Keyboard.isKeyPressed(KeyEvent.VK_DOWN) && dir != Up){
-				dir = Down;
-				changedDir = true;
-			}else if(Keyboard.isKeyPressed(KeyEvent.VK_D) || Keyboard.isKeyPressed(KeyEvent.VK_RIGHT) && dir != Left){
-				dir = Right;
-				changedDir = true;
-			}else if(Keyboard.isKeyPressed(KeyEvent.VK_A) || Keyboard.isKeyPressed(KeyEvent.VK_LEFT) && dir != Right){
-				dir = Left;
-				changedDir = true;
-			}
-		}
-
 		if(timer % 6 == 0){
-
-			changedDir = false;
 
 			for(Vector2i piece : tail){
 				if(Vector2i.getDistance(pos, piece) <= 0){
@@ -97,6 +85,8 @@ public class Snake extends Mob{
 				move(xa, ya);
 			}
 
+			changedDir = false;
+
 			if(add){
 				tail.add(new Vector2i(pos));
 				add = false;
@@ -119,7 +109,6 @@ public class Snake extends Mob{
 			}
 
 			oldPos = new Vector2i(pos);
-
 		}
 
 		timer++;
@@ -163,7 +152,39 @@ public class Snake extends Mob{
 
 	@Override
 	public void onEvent(Event event){
-		super.onEvent(event);
+		EventDispatcher dispatcher = new EventDispatcher(event);
+		dispatcher.dispatch(Event.Type.KEY_PRESSED, (Event e) -> onKeyPressed((KeyPressedEvent) event));
+		dispatcher.dispatch(Event.Type.KEY_RELEASED, (Event e) -> onKeyReleased((KeyReleasedEvent) event));
+	}
+
+	private boolean onKeyPressed(KeyPressedEvent event){
+
+		int button = event.getButton();
+		if(!changedDir){
+			if((button == KeyEvent.VK_W || button == KeyEvent.VK_UP) && dir != Down){
+				dir = Up;
+				changedDir = true;
+				return true;
+			}else if((button == KeyEvent.VK_S || button == KeyEvent.VK_DOWN) && dir != Up){
+				dir = Down;
+				changedDir = true;
+				return true;
+			}else if((button == KeyEvent.VK_D || button == KeyEvent.VK_RIGHT) && dir != Left){
+				dir = Right;
+				changedDir = true;
+				return true;
+			}else if((button == KeyEvent.VK_A || button == KeyEvent.VK_LEFT) && dir != Right){
+				dir = Left;
+				changedDir = true;
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	private boolean onKeyReleased(KeyReleasedEvent event){
+		return false;
 	}
 
 }

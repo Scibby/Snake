@@ -56,7 +56,9 @@ public class GameLevel extends Level{
 	
 	@Override
 	public void onEvent(Event event){
-
+		if(mobs.get(0) != null){
+			mobs.get(0).onEvent(event);
+		}
 	}
 
 	@Override

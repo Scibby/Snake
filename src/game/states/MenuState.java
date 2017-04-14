@@ -11,6 +11,7 @@ import scibby.graphics.Screen;
 import scibby.states.GameStateManager;
 import scibby.states.State;
 import scibby.ui.UIActionListener;
+import scibby.ui.UIButtonListener;
 import scibby.ui.UIPanel;
 import scibby.ui.components.UIButton;
 import scibby.ui.components.UILabel;
@@ -46,6 +47,21 @@ public class MenuState extends State{
 				GameStateManager.currentState = 1;
 				Main.gameState.start();
 			}
+
+		}, new UIButtonListener(){
+			public void buttonEntered(UIButton button){
+				super.buttonEntered(button);
+				button.setColour(0xdff442);
+				button.label.setColour(0xdff442);
+			};
+
+			@Override
+			public void buttonExited(UIButton button){
+				super.buttonExited(button);
+				button.setColour(0xffffff);
+				button.label.setColour(0xffffff);
+			}
+
 		});
 
 		title.setColour(0xeeeeee);
@@ -68,20 +84,6 @@ public class MenuState extends State{
 	@Override
 	public void render(Screen screen){
 		super.render(screen);
-	}
-
-	@Override
-	public void onEvent(Event event){
-		super.onEvent(event);
-		if(button != null){
-			if(button.isHovering()){
-				button.setColour(0xdff442);
-				button.label.setColour(0xdff442);
-			}else{
-				button.setColour(0xeeeeee);
-				button.label.setColour(0xeeeeee);
-			}
-		}
 	}
 
 }

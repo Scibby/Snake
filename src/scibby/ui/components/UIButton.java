@@ -19,8 +19,7 @@ public class UIButton extends UIComponent{
 
 	private UIActionListener actionListener;
 
-	private UIButtonListener buttonListener = new UIButtonListener(){
-	};
+	public UIButtonListener buttonListener;
 
 	public UILabel label;
 
@@ -29,15 +28,20 @@ public class UIButton extends UIComponent{
 
 	private int colour = 0xdd00000;
 
-	public UIButton(Vector2i position, int width, int height, UIPanel parent, UIActionListener actionListener){
+	public UIButton(Vector2i position, int width, int height, UIPanel parent, UIActionListener actionListener, UIButtonListener buttonListener){
 		super(position, width, height, parent);
 		this.actionListener = actionListener;
+		this.buttonListener = buttonListener;
 		label = new UILabel(new Vector2i(position), width, height, parent, "Button", new Font("Arial", Font.PLAIN, 26), this);
 		parent.addComponent(label);
 	}
 
 	public UIButton(int x, int y, int width, int height, UIPanel parent, UIActionListener actionListener){
-		this(new Vector2i(x, y), width, height, parent, actionListener);
+		this(new Vector2i(x, y), width, height, parent, actionListener, new UIButtonListener(){});
+	}
+	
+	public UIButton(int x, int y, int width, int height, UIPanel parent, UIActionListener actionListener, UIButtonListener buttonListener){
+		this(new Vector2i(x, y), width, height, parent, actionListener, buttonListener);
 	}
 
 	@Override
