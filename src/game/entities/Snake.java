@@ -41,28 +41,38 @@ public class Snake extends Mob{
 
 	private boolean warped = false;
 
+	private boolean changedDir = false;
+
 	private Vector2i oldPos = new Vector2i();
 
 	public void tick(Food food){
 		super.tick();
 		int xa = 0, ya = 0;
 
-		if(timer % 4 == 0){
-			
+		if(!changedDir){
+			if(Keyboard.isKeyPressed(KeyEvent.VK_W) || Keyboard.isKeyPressed(KeyEvent.VK_UP) && dir != Down){
+				dir = Up;
+				changedDir = true;
+			}else if(Keyboard.isKeyPressed(KeyEvent.VK_S) || Keyboard.isKeyPressed(KeyEvent.VK_DOWN) && dir != Up){
+				dir = Down;
+				changedDir = true;
+			}else if(Keyboard.isKeyPressed(KeyEvent.VK_D) || Keyboard.isKeyPressed(KeyEvent.VK_RIGHT) && dir != Left){
+				dir = Right;
+				changedDir = true;
+			}else if(Keyboard.isKeyPressed(KeyEvent.VK_A) || Keyboard.isKeyPressed(KeyEvent.VK_LEFT) && dir != Right){
+				dir = Left;
+				changedDir = true;
+			}
+		}
+
+		if(timer % 6 == 0){
+
+			changedDir = false;
+
 			for(Vector2i piece : tail){
 				if(Vector2i.getDistance(pos, piece) <= 0){
 					death();
 				}
-			}
-
-			if(Keyboard.isKeyPressed(KeyEvent.VK_W) && dir != Down){
-				dir = Up;
-			}else if(Keyboard.isKeyPressed(KeyEvent.VK_S) && dir != Up){
-				dir = Down;
-			}else if(Keyboard.isKeyPressed(KeyEvent.VK_D) && dir != Left){
-				dir = Right;
-			}else if(Keyboard.isKeyPressed(KeyEvent.VK_A) && dir != Right){
-				dir = Left;
 			}
 
 			switch(dir){
@@ -144,11 +154,10 @@ public class Snake extends Mob{
 	@Override
 	public void render(Screen screen){
 		super.render(screen);
-		screen.fillRect((int) x, (int) y, width, height, 0xaaffaa, false);
+		screen.fillRect((int) x, (int) y, width, height, 0x44ff44, false);
 
 		for(int i = 0; i < tail.size(); i++){
-			//colours.get(i)
-			screen.fillRect((int) tail.get(i).getX(), (int) tail.get(i).getY(), width, height, 0xffffff, false);
+			screen.fillRect((int) tail.get(i).getX(), (int) tail.get(i).getY(), width, height, colours.get(i), false);
 		}
 	}
 

@@ -41,12 +41,12 @@ public class Screen{
 		}
 	}
 
-	public void drawRect(int x, int y, int width, int height, int colour, int thickness, boolean fixed){
+	public void drawRect(int x, int y, int width, int height, int colour, int thickness, boolean full, boolean fixed){
 		if(!fixed){
 			x -= xOffset;
 			y -= yOffset;
 		}
-		
+
 		thickness = thickness <= 0 ? 1 : thickness;
 
 		for(int yy = 0; yy < height; yy++){
@@ -59,13 +59,18 @@ public class Screen{
 				for(int i = 0; i < thickness; i++){
 					if(yy == i){
 						pixels[xo + yo * this.width] = colour + (0xff << 24);
-					}else if(yy == height - i - 1){
-						pixels[xo + yo * this.width] = colour + (0xff << 24);
 					}else if(xx == i){
 						pixels[xo + yo * this.width] = colour + (0xff << 24);
-					}else if(xx == width - i - 1){
-						pixels[xo + yo * this.width] = colour + (0xff << 24);
 					}
+					
+					if(full){
+						if(xx == width - i - 1){
+							pixels[xo + yo * this.width] = colour + (0xff << 24);
+						}else if(yy == height - i - 1){
+							pixels[xo + yo * this.width] = colour + (0xff << 24);
+						}
+					}
+
 				}
 			}
 		}

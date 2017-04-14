@@ -97,7 +97,7 @@ public class UIButton extends UIComponent{
 
 	@Override
 	public void render(Screen screen){
-		screen.drawRect(getAbsolutePosition().getX(), getAbsolutePosition().getY(), width, height, colour, 4, true);
+		screen.drawRect(getAbsolutePosition().getX(), getAbsolutePosition().getY(), width, height, colour, 4, true, true);
 	}
 
 	public void setText(String text){

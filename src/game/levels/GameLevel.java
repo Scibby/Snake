@@ -11,7 +11,13 @@ import scibby.level.Level;
 
 public class GameLevel extends Level{
 
-	public static Tile voidTile = new Tile(null, false);
+	public static Tile voidTile = new Tile(null, false){
+		public void render(int x, int y, Screen screen) {
+			
+			screen.fillRect(x, y, 16, 16, 0x222222, false);
+			screen.drawRect(x, y, 16, 16, 0x000000, 1, false, false);
+		};
+	};
 	public static Tile wallTile = new Tile(null, true);
 
 	private Random rand = new Random();
