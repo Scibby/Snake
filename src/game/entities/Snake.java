@@ -15,11 +15,7 @@ import scibby.events.Event;
 import scibby.events.EventDispatcher;
 import scibby.events.types.keyboard.KeyPressedEvent;
 import scibby.events.types.keyboard.KeyReleasedEvent;
-import scibby.events.types.mouse.MouseMovedEvent;
-import scibby.events.types.mouse.MousePressedEvent;
-import scibby.events.types.mouse.MouseReleasedEvent;
 import scibby.graphics.Screen;
-import scibby.input.Keyboard;
 import scibby.states.GameStateManager;
 import scibby.util.Vector2i;
 
@@ -40,7 +36,7 @@ public class Snake extends Mob{
 
 	private int timer = 0;
 
-	Direction dir = Down;
+	private Direction dir = Down;
 	private final int SPEED = 16;
 
 	private boolean add = false;

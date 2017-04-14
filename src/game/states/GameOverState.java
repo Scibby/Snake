@@ -6,10 +6,10 @@ import java.awt.FontMetrics;
 
 import game.main.Main;
 import scibby.core.Game;
-import scibby.graphics.Screen;
 import scibby.states.GameStateManager;
 import scibby.states.State;
 import scibby.ui.UIActionListener;
+import scibby.ui.UIButtonListener;
 import scibby.ui.UIPanel;
 import scibby.ui.components.UIButton;
 import scibby.ui.components.UILabel;
@@ -56,6 +56,21 @@ public class GameOverState extends State{
 		replay.setColour(0xeeeeee);
 		replay.label.setColour(0xeeeeee);
 		replay.setText("Replay");
+		replay.setButtonListener(new UIButtonListener(){
+			@Override
+			public void buttonEntered(UIButton button){
+				super.buttonEntered(button);
+				replay.setColour(0xdff442);
+				replay.label.setColour(0xdff442);
+			}
+			
+			@Override
+			public void buttonExited(UIButton button){
+				super.buttonExited(button);
+				replay.setColour(0xeeeeee);
+				replay.label.setColour(0xeeeeee);
+			}
+		});
 		
 		Game.getUI().addPanel(panel);
 		addLayer(Main.getUI());
@@ -64,20 +79,6 @@ public class GameOverState extends State{
 	@Override
 	public void tick(){
 		super.tick();
-	}
-
-	@Override
-	public void render(Screen screen){
-		super.render(screen);
-		if(replay != null){
-			if(replay.isHovering()){
-				replay.setColour(0xdff442);
-				replay.label.setColour(0xdff442);
-			}else{
-				replay.setColour(0xeeeeee);
-				replay.label.setColour(0xeeeeee);
-			}
-		}
 	}
 	
 }

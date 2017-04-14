@@ -6,7 +6,6 @@ import java.awt.FontMetrics;
 
 import game.main.Main;
 import scibby.core.Game;
-import scibby.events.Event;
 import scibby.graphics.Screen;
 import scibby.states.GameStateManager;
 import scibby.states.State;
@@ -65,8 +64,8 @@ public class MenuState extends State{
 			@Override
 			public void buttonExited(UIButton button){
 				super.buttonExited(button);
-				button.setColour(0xffffff);
-				button.label.setColour(0xffffff);
+				button.setColour(0xeeeeee);
+				button.label.setColour(0xeeeeee);
 			}
 
 		});
