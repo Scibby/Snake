@@ -17,6 +17,7 @@ import scibby.events.types.keyboard.KeyPressedEvent;
 import scibby.events.types.keyboard.KeyReleasedEvent;
 import scibby.graphics.Screen;
 import scibby.states.GameStateManager;
+import scibby.util.AudioPlayer;
 import scibby.util.Vector2i;
 
 public class Snake extends Mob{
@@ -45,6 +46,8 @@ public class Snake extends Mob{
 
 	private boolean changedDir = false;
 
+	private AudioPlayer player = new AudioPlayer("eat");
+	
 	private Vector2i oldPos = new Vector2i();
 
 	public void tick(Food food){
@@ -102,6 +105,7 @@ public class Snake extends Mob{
 				score++;
 				add = true;
 				food.newLocation(this);
+				player.play();
 			}
 
 			oldPos = new Vector2i(pos);
